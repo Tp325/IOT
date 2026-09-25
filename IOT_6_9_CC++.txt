@@ -1,0 +1,107 @@
+//////////////////6
+
+#include <Arduino.h>
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  // if (millis() - previousMillis >= 1000)
+  // {
+  //   previousMillis = millis();
+  //   Serial.println("Hello world!");
+  // }
+  Serial.println("Hello world!");
+  delay(1000);
+}
+
+/////////////////////7
+unsigned long previousMillis = 0;
+int counter = -1;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (millis() - previousMillis >= 1500) {
+    previousMillis = millis();
+    
+    if (counter == -1) {
+      Serial.println("Hello world!");
+    } else {
+      Serial.println(counter);
+    }
+    
+    counter++;
+    if (counter > 9) {
+      counter = -1;
+    }
+  }
+}
+
+///////////////////////8
+unsigned long previousMillis = 0;
+int a = 25;
+int b = 14;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (millis() - previousMillis >= 5000) {
+    previousMillis = millis();
+    
+    Serial.print("So lon hon giua ");
+    Serial.print(a);
+    Serial.print(" va ");
+    Serial.print(b);
+    Serial.print(" la: ");
+    
+    if (a > b) {
+      Serial.println(a);
+    } else {
+      Serial.println(b);
+    }
+  }
+}
+
+/////////////////9
+
+unsigned long previousMillis = 0;
+float a = 2.0;
+float b = -5.0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (millis() - previousMillis >= 10000) {
+    previousMillis = millis();
+    
+    Serial.print("Phuong trinh: ");
+    Serial.print(a);
+    Serial.print("x + ");
+    Serial.print(b);
+    Serial.println(" = 0");
+    
+    if (a == 0) {
+      if (b == 0) {
+        Serial.println("-> Phuong trinh vo so nghiem.");
+      } else {
+        Serial.println("-> Phuong trinh vo nghiem.");
+      }
+    } else {
+      float x = -b / a;
+      Serial.print("-> Nghiem x = ");
+      Serial.println(x);
+    }
+  }
+}
+
+Hàm delay() sẽ chặn toàn bộ luồng thực thi của vi điều khiển, khiến thiết bị "đóng băng" và không thể nhận lệnh hay dữ liệu từ Serial Monitor trong lúc chờ. Ngược lại, millis() hoạt động như một bộ đếm thời gian chạy ngầm, giúp vi điều khiển vẫn có thể liên tục quét đầu vào và xử lý các tác vụ khác trong khi chờ đến mốc thời gian tiếp theo để in kết quả.
